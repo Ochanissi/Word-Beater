@@ -31,6 +31,11 @@ const words = [
 function init() {
  // Load word from array
  showWord(words);
+ 
+ //Call countdown every second
+ setInterval(countdown, 1000);
+ // Check game status
+ setInterval(checkStatus, 50);
 }
 
 // Pick & Show Random Word
@@ -40,4 +45,25 @@ function showWord(words) {
 
     // Output random word
     currentWord.innerHTML = words[randIndex];
+}
+
+// Countdown Timer
+function countdown() {
+    // Make sure time is not run out
+    if(time > 0) {
+            //Decremenet
+            time--;
+    } else if(time === 0) {
+        // Game is over
+        isPlaying = false;
+    }
+    // Show time
+    timeDisplay.innerHTML = time;
+}
+
+// Check Game Status
+function checkStatus() {
+    if(!isPlaying && time === 0) {
+        message.innerHTML = 'Game Over!';
+    }
 }
